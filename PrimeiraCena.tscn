@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dw1yku8f4h21p"]
+
+[ext_resource type="Script" uid="uid://c81fhw0hqndw6" path="res://primeira_cena.gd" id="1_0q2ab"]
+[ext_resource type="FontFile" uid="uid://dytb2tnj5hekf" path="res://HelvetiPixel.ttf" id="2_pw7wf"]
+[ext_resource type="Texture2D" uid="uid://n2lsbk7164lp" path="res://GameTitle.svg" id="3_0q2ab"]
+[ext_resource type="Texture2D" uid="uid://vcn245ms4rra" path="res://scene.svg" id="3_pw7wf"]
+
+[node name="Cena" type="Node2D" unique_id=886527914]
+script = ExtResource("1_0q2ab")
+
+[node name="UI" type="Control" parent="." unique_id=94803782]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI" unique_id=1246907750]
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+texture = ExtResource("3_pw7wf")
+stretch_mode = 6
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="StartButton" type="Button" parent="UI" unique_id=1725671769]
+layout_mode = 0
+offset_left = 199.0
+offset_top = 1125.0
+offset_right = 881.0
+offset_bottom = 1248.0
+theme_override_fonts/font = ExtResource("2_pw7wf")
+theme_override_font_sizes/font_size = 120
+text = "Iniciar"
+
+[node name="ExitButton" type="Button" parent="UI" unique_id=1389245924]
+layout_mode = 0
+offset_left = 199.0
+offset_top = 1320.0
+offset_right = 881.0
+offset_bottom = 1443.0
+theme_override_fonts/font = ExtResource("2_pw7wf")
+theme_override_font_sizes/font_size = 120
+text = "Sair"
+
+[node name="TextureRect2" type="TextureRect" parent="UI" unique_id=208632208]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 368.0
+offset_right = 1077.0
+offset_bottom = 1060.0
+texture = ExtResource("3_0q2ab")
+stretch_mode = 5
+metadata/_edit_lock_ = true

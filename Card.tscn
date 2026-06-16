@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dto05sxmd5m4x"]
+
+[ext_resource type="Texture2D" uid="uid://b3xhadruiffor" path="res://CardTextures/card.svg" id="1_wi8ie"]
+[ext_resource type="Texture2D" uid="uid://dhep5ihs3w17c" path="res://CardTextures/card_pressed.svg" id="2_8ekg7"]
+[ext_resource type="Texture2D" uid="uid://c6mu8rk2fs2k2" path="res://CardTextures/card_hover.svg" id="3_w7jam"]
+[ext_resource type="Script" uid="uid://cwjdlrvkauyx0" path="res://card.gd" id="4_iiotd"]
+[ext_resource type="FontFile" uid="uid://dytb2tnj5hekf" path="res://HelvetiPixel.ttf" id="5_vis3t"]
+
+[node name="Card" type="TextureButton" unique_id=648727792]
+custom_minimum_size = Vector2(180, 270)
+offset_right = 180.0
+offset_bottom = 270.0
+texture_normal = ExtResource("1_wi8ie")
+texture_pressed = ExtResource("2_8ekg7")
+texture_hover = ExtResource("3_w7jam")
+stretch_mode = 5
+script = ExtResource("4_iiotd")
+
+[node name="CardLabel" type="Label" parent="." unique_id=629725929]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_vis3t")
+theme_override_font_sizes/font_size = 120
+horizontal_alignment = 1
+vertical_alignment = 1

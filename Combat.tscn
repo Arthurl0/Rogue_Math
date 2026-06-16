@@ -1,0 +1,195 @@
+[gd_scene format=3 uid="uid://doqw387kfutah"]
+
+[ext_resource type="Script" uid="uid://d027x5gvui6v2" path="res://combat.gd" id="1_8suwl"]
+[ext_resource type="Texture2D" uid="uid://bikipfadn1bua" path="res://CombatTexture.svg" id="1_vj48t"]
+[ext_resource type="PackedScene" uid="uid://dto05sxmd5m4x" path="res://Card.tscn" id="2_tivk6"]
+[ext_resource type="FontFile" uid="uid://dytb2tnj5hekf" path="res://HelvetiPixel.ttf" id="5_lnhn1"]
+[ext_resource type="Script" uid="uid://bbjvmy0usmcr8" path="res://enemy.gd" id="5_tivk6"]
+[ext_resource type="Texture2D" uid="uid://ce38j1lltalgn" path="res://EnemiesTextures/zero_monster.svg" id="6_brs8u"]
+[ext_resource type="Texture2D" uid="uid://iihsee5ktfgw" path="res://EnemyBar.svg" id="8_a0jkw"]
+[ext_resource type="Texture2D" uid="uid://cxr5gehpwf13x" path="res://EnemyHealth.svg" id="9_8suwl"]
+[ext_resource type="Texture2D" uid="uid://d35u7dj0alt24" path="res://LifeBars/PlayerBarUnder.svg" id="12_pbxr6"]
+[ext_resource type="Texture2D" uid="uid://kqc7k4cyq3ph" path="res://ButtonsTextures/PlusButton.svg" id="12_rjkgv"]
+[ext_resource type="Texture2D" uid="uid://1g622h1oevnh" path="res://LifeBars/PlayerBarProgress.svg" id="13_rjkgv"]
+[ext_resource type="Texture2D" uid="uid://rpcevf2i4pa3" path="res://ButtonsTextures/PlusButtonPressed.svg" id="13_s3gad"]
+[ext_resource type="Texture2D" uid="uid://ch4vft0y0l2p8" path="res://ButtonsTextures/PlusButtonHover.svg" id="14_28vat"]
+[ext_resource type="Texture2D" uid="uid://csjrbg4byil31" path="res://ButtonsTextures/TimesButton.svg" id="14_kfcul"]
+[ext_resource type="Texture2D" uid="uid://chl8oewxkmtua" path="res://ButtonsTextures/TimesButtonPressed.svg" id="15_qffwa"]
+[ext_resource type="Texture2D" uid="uid://u7tai1qwd70o" path="res://ButtonsTextures/TimesButtonHover.svg" id="16_0wd2w"]
+[ext_resource type="Texture2D" uid="uid://cw6e4hn3o1p72" path="res://ButtonsTextures/DivideButton.svg" id="17_0c3gn"]
+[ext_resource type="Texture2D" uid="uid://dkb43ofgdsn1g" path="res://ButtonsTextures/DivideButtonPressed.svg" id="18_kuwpv"]
+[ext_resource type="Texture2D" uid="uid://cuyf7c34faujy" path="res://ButtonsTextures/DivideButtonHover.svg" id="19_1d4ld"]
+[ext_resource type="Texture2D" uid="uid://b7p8q3gc7t8al" path="res://ButtonsTextures/MinusButton.svg" id="20_c7spo"]
+[ext_resource type="Texture2D" uid="uid://c0urwtj7myfg6" path="res://ButtonsTextures/MinusButtonPressed.svg" id="21_1kwmq"]
+[ext_resource type="Texture2D" uid="uid://c1ixdy3auqde0" path="res://ButtonsTextures/MinusButtonHover.svg" id="22_3lqfi"]
+[ext_resource type="Texture2D" uid="uid://8j6sgciwmrad" path="res://ButtonsTextures/AttackButton.svg" id="23_587qa"]
+[ext_resource type="Texture2D" uid="uid://dgyf5uoxhf07u" path="res://ButtonsTextures/AttackButtonPressed.svg" id="24_p707w"]
+[ext_resource type="Texture2D" uid="uid://b0tftrdk55a1d" path="res://ButtonsTextures/AttackButtonHover.svg" id="25_77vin"]
+[ext_resource type="Texture2D" uid="uid://d4bqiabr1yeuy" path="res://ButtonsTextures/SkipButton.svg" id="26_sdhnr"]
+[ext_resource type="Texture2D" uid="uid://cgwtb2mpysj16" path="res://ButtonsTextures/SkipButtonPressed.svg" id="27_7q1b7"]
+[ext_resource type="Texture2D" uid="uid://d1i5dc1rguuor" path="res://ButtonsTextures/SkipButtonHover.svg" id="28_alyn1"]
+
+[node name="Combat" type="Node2D" unique_id=1544415699]
+script = ExtResource("1_8suwl")
+card_scene = ExtResource("2_tivk6")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1929837428]
+offset_right = 1080.0
+offset_bottom = 1920.0
+texture = ExtResource("1_vj48t")
+stretch_mode = 5
+
+[node name="MaoJogador" type="HBoxContainer" parent="." unique_id=337309284]
+offset_top = 1480.0
+offset_right = 1080.0
+offset_bottom = 1750.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Enemy1" type="Sprite2D" parent="." unique_id=1012655311]
+position = Vector2(555, 810)
+scale = Vector2(3, 3)
+texture = ExtResource("6_brs8u")
+script = ExtResource("5_tivk6")
+
+[node name="LifeBar" type="TextureProgressBar" parent="Enemy1" unique_id=2079754296]
+offset_left = -45.0
+offset_top = -75.0
+offset_right = 35.0
+offset_bottom = -35.0
+texture_under = ExtResource("8_a0jkw")
+texture_progress = ExtResource("9_8suwl")
+
+[node name="TextBar" type="Label" parent="Enemy1/LifeBar" unique_id=1852444371]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("5_lnhn1")
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Enemy2" type="Sprite2D" parent="." unique_id=397542815]
+position = Vector2(270, 520)
+scale = Vector2(3, 3)
+texture = ExtResource("6_brs8u")
+script = ExtResource("5_tivk6")
+
+[node name="LifeBar" type="TextureProgressBar" parent="Enemy2" unique_id=256334369]
+offset_left = -45.0
+offset_top = -75.0
+offset_right = 35.0
+offset_bottom = -35.0
+texture_under = ExtResource("8_a0jkw")
+texture_progress = ExtResource("9_8suwl")
+
+[node name="TextBar" type="Label" parent="Enemy2/LifeBar" unique_id=1072886687]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("5_lnhn1")
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Enemy3" type="Sprite2D" parent="." unique_id=1944359862]
+position = Vector2(820, 520)
+scale = Vector2(3, 3)
+texture = ExtResource("6_brs8u")
+script = ExtResource("5_tivk6")
+
+[node name="LifeBar" type="TextureProgressBar" parent="Enemy3" unique_id=1719652697]
+offset_left = -45.0
+offset_top = -75.0
+offset_right = 35.0
+offset_bottom = -35.0
+texture_under = ExtResource("8_a0jkw")
+texture_progress = ExtResource("9_8suwl")
+
+[node name="TextBar" type="Label" parent="Enemy3/LifeBar" unique_id=1789224770]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("5_lnhn1")
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerBar" type="TextureProgressBar" parent="." unique_id=1459865662]
+offset_left = 40.0
+offset_top = 60.0
+offset_right = 120.0
+offset_bottom = 70.0
+scale = Vector2(12.5, 12.5)
+texture_under = ExtResource("12_pbxr6")
+texture_progress = ExtResource("13_rjkgv")
+
+[node name="LabelPlayerBar" type="Label" parent="PlayerBar" unique_id=2092235005]
+layout_mode = 0
+offset_right = 1000.0
+offset_bottom = 125.0
+scale = Vector2(0.08, 0.08)
+theme_override_fonts/font = ExtResource("5_lnhn1")
+theme_override_font_sizes/font_size = 120
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlusButton" type="TextureButton" parent="." unique_id=392837343]
+offset_left = 100.0
+offset_top = 1280.0
+offset_right = 260.0
+offset_bottom = 1440.0
+texture_normal = ExtResource("12_rjkgv")
+texture_pressed = ExtResource("13_s3gad")
+texture_hover = ExtResource("14_28vat")
+stretch_mode = 5
+
+[node name="TimesButton" type="TextureButton" parent="." unique_id=1049012895]
+offset_left = 340.0
+offset_top = 1280.0
+offset_right = 500.0
+offset_bottom = 1440.0
+texture_normal = ExtResource("14_kfcul")
+texture_pressed = ExtResource("15_qffwa")
+texture_hover = ExtResource("16_0wd2w")
+stretch_mode = 5
+
+[node name="DivideButton" type="TextureButton" parent="." unique_id=1777593017]
+offset_left = 580.0
+offset_top = 1280.0
+offset_right = 740.0
+offset_bottom = 1440.0
+texture_normal = ExtResource("17_0c3gn")
+texture_pressed = ExtResource("18_kuwpv")
+texture_hover = ExtResource("19_1d4ld")
+stretch_mode = 5
+
+[node name="MinusButton" type="TextureButton" parent="." unique_id=1981001812]
+offset_left = 820.0
+offset_top = 1280.0
+offset_right = 980.0
+offset_bottom = 1440.0
+texture_normal = ExtResource("20_c7spo")
+texture_pressed = ExtResource("21_1kwmq")
+texture_hover = ExtResource("22_3lqfi")
+stretch_mode = 5
+
+[node name="AttackButton" type="TextureButton" parent="." unique_id=1954086013]
+offset_left = 100.0
+offset_top = 1050.0
+offset_right = 420.0
+offset_bottom = 1210.0
+texture_normal = ExtResource("23_587qa")
+texture_pressed = ExtResource("24_p707w")
+texture_hover = ExtResource("25_77vin")
+stretch_mode = 5
+
+[node name="SkipButton" type="TextureButton" parent="." unique_id=324027797]
+offset_left = 660.0
+offset_top = 1050.0
+offset_right = 980.0
+offset_bottom = 1210.0
+texture_normal = ExtResource("26_sdhnr")
+texture_pressed = ExtResource("27_7q1b7")
+texture_hover = ExtResource("28_alyn1")
+stretch_mode = 5
