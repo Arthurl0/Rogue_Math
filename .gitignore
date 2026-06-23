@@ -81,3 +81,9 @@ TimesButton.aseprite
 zero_monster.aseprite
 PrimeiraCena.tscn18181417135.tmp
 PrimeiraCena.tscn349894038.tmp
+export_presets.cfg
+export_presets.cfg
+*.aseprite
+*.import
+*.svg
+*.png

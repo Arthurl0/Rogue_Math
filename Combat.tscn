@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://d027x5gvui6v2" path="res://combat.gd" id="1_8suwl"]
 [ext_resource type="Texture2D" uid="uid://bikipfadn1bua" path="res://CombatTexture.svg" id="1_vj48t"]
 [ext_resource type="PackedScene" uid="uid://dto05sxmd5m4x" path="res://Card.tscn" id="2_tivk6"]
+[ext_resource type="Texture2D" uid="uid://b6r4pf4nnpudl" path="res://zero_monster_sprite.png" id="4_kuwpv"]
 [ext_resource type="FontFile" uid="uid://dytb2tnj5hekf" path="res://HelvetiPixel.ttf" id="5_lnhn1"]
 [ext_resource type="Script" uid="uid://bbjvmy0usmcr8" path="res://enemy.gd" id="5_tivk6"]
-[ext_resource type="Texture2D" uid="uid://ce38j1lltalgn" path="res://EnemiesTextures/zero_monster.svg" id="6_brs8u"]
 [ext_resource type="Texture2D" uid="uid://iihsee5ktfgw" path="res://EnemyBar.svg" id="8_a0jkw"]
 [ext_resource type="Texture2D" uid="uid://cxr5gehpwf13x" path="res://EnemyHealth.svg" id="9_8suwl"]
 [ext_resource type="Texture2D" uid="uid://d35u7dj0alt24" path="res://LifeBars/PlayerBarUnder.svg" id="12_pbxr6"]
@@ -28,6 +28,68 @@
 [ext_resource type="Texture2D" uid="uid://d4bqiabr1yeuy" path="res://ButtonsTextures/SkipButton.svg" id="26_sdhnr"]
 [ext_resource type="Texture2D" uid="uid://cgwtb2mpysj16" path="res://ButtonsTextures/SkipButtonPressed.svg" id="27_7q1b7"]
 [ext_resource type="Texture2D" uid="uid://d1i5dc1rguuor" path="res://ButtonsTextures/SkipButtonHover.svg" id="28_alyn1"]
+[ext_resource type="Texture2D" uid="uid://b0buo38y2c848" path="res://CardTextures/Victory_menu.svg" id="29_3lqfi"]
+[ext_resource type="Texture2D" uid="uid://cpcvubh04f58o" path="res://ButtonsTextures/ButtonText.svg" id="30_587qa"]
+[ext_resource type="Texture2D" uid="uid://cak8wqljdk31t" path="res://ButtonsTextures/ButtonTextPressed.svg" id="31_p707w"]
+[ext_resource type="Texture2D" uid="uid://biqcagkap1ekk" path="res://ButtonsTextures/ButtonTextHover.svg" id="32_77vin"]
+[ext_resource type="Texture2D" uid="uid://pbah07ugaxra" path="res://CardTextures/Lost_menu.svg" id="33_sdhnr"]
+
+[sub_resource type="Animation" id="Animation_1d4ld"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_kuwpv"]
+resource_name = "Enemy_hurt"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_c7spo"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_1kwmq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c7spo"]
+_data = {
+&"Enemy_attack": SubResource("Animation_1d4ld"),
+&"Enemy_hurt": SubResource("Animation_kuwpv"),
+&"Idle": SubResource("Animation_c7spo"),
+&"RESET": SubResource("Animation_1kwmq")
+}
 
 [node name="Combat" type="Node2D" unique_id=1544415699]
 script = ExtResource("1_8suwl")
@@ -49,7 +111,8 @@ alignment = 1
 [node name="Enemy1" type="Sprite2D" parent="." unique_id=1012655311]
 position = Vector2(555, 810)
 scale = Vector2(3, 3)
-texture = ExtResource("6_brs8u")
+texture = ExtResource("4_kuwpv")
+hframes = 5
 script = ExtResource("5_tivk6")
 
 [node name="LifeBar" type="TextureProgressBar" parent="Enemy1" unique_id=2079754296]
@@ -69,10 +132,14 @@ theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy1" unique_id=1804291842]
+libraries/ = SubResource("AnimationLibrary_c7spo")
+
 [node name="Enemy2" type="Sprite2D" parent="." unique_id=397542815]
 position = Vector2(270, 520)
 scale = Vector2(3, 3)
-texture = ExtResource("6_brs8u")
+texture = ExtResource("4_kuwpv")
+hframes = 5
 script = ExtResource("5_tivk6")
 
 [node name="LifeBar" type="TextureProgressBar" parent="Enemy2" unique_id=256334369]
@@ -92,10 +159,14 @@ theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy2" unique_id=349416264]
+libraries/ = SubResource("AnimationLibrary_c7spo")
+
 [node name="Enemy3" type="Sprite2D" parent="." unique_id=1944359862]
 position = Vector2(820, 520)
 scale = Vector2(3, 3)
-texture = ExtResource("6_brs8u")
+texture = ExtResource("4_kuwpv")
+hframes = 5
 script = ExtResource("5_tivk6")
 
 [node name="LifeBar" type="TextureProgressBar" parent="Enemy3" unique_id=1719652697]
@@ -114,6 +185,9 @@ theme_override_fonts/font = ExtResource("5_lnhn1")
 theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy3" unique_id=1684897195]
+libraries/ = SubResource("AnimationLibrary_c7spo")
 
 [node name="PlayerBar" type="TextureProgressBar" parent="." unique_id=1459865662]
 offset_left = 40.0
@@ -193,3 +267,125 @@ texture_normal = ExtResource("26_sdhnr")
 texture_pressed = ExtResource("27_7q1b7")
 texture_hover = ExtResource("28_alyn1")
 stretch_mode = 5
+
+[node name="VictoryMenu" type="TextureRect" parent="." unique_id=1540786370]
+offset_left = 90.0
+offset_top = 60.0
+offset_right = 990.0
+offset_bottom = 1860.0
+texture = ExtResource("29_3lqfi")
+stretch_mode = 5
+
+[node name="ContinueButton" type="TextureButton" parent="VictoryMenu" unique_id=686682837]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 1250.0
+offset_right = 720.0
+offset_bottom = 1430.0
+texture_normal = ExtResource("30_587qa")
+texture_pressed = ExtResource("31_p707w")
+texture_hover = ExtResource("32_77vin")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="VictoryMenu/ContinueButton" unique_id=51475077]
+layout_mode = 0
+offset_right = 540.0
+offset_bottom = 180.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_lnhn1")
+theme_override_font_sizes/font_size = 140
+text = "Continuar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="VictoryMenu" unique_id=1639646766]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 1500.0
+offset_right = 720.0
+offset_bottom = 1680.0
+texture_normal = ExtResource("30_587qa")
+texture_pressed = ExtResource("31_p707w")
+texture_hover = ExtResource("32_77vin")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="VictoryMenu/ExitButton" unique_id=142940376]
+layout_mode = 0
+offset_right = 540.0
+offset_bottom = 180.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_lnhn1")
+theme_override_font_sizes/font_size = 160
+text = "Sair"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pontos" type="Label" parent="VictoryMenu" unique_id=642600803]
+layout_mode = 0
+offset_right = 900.0
+offset_bottom = 840.0
+theme_override_fonts/font = ExtResource("5_lnhn1")
+theme_override_font_sizes/font_size = 180
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DefeatMenu" type="TextureRect" parent="." unique_id=1713250916]
+offset_left = 90.0
+offset_top = 60.0
+offset_right = 990.0
+offset_bottom = 1860.0
+texture = ExtResource("33_sdhnr")
+stretch_mode = 5
+
+[node name="ContinueButton" type="TextureButton" parent="DefeatMenu" unique_id=1684086021]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 1250.0
+offset_right = 720.0
+offset_bottom = 1430.0
+texture_normal = ExtResource("30_587qa")
+texture_pressed = ExtResource("31_p707w")
+texture_hover = ExtResource("32_77vin")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="DefeatMenu/ContinueButton" unique_id=710617989]
+layout_mode = 0
+offset_right = 540.0
+offset_bottom = 180.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_lnhn1")
+theme_override_font_sizes/font_size = 80
+text = "Tentar Novamente"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="DefeatMenu" unique_id=2097288689]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 1500.0
+offset_right = 720.0
+offset_bottom = 1680.0
+texture_normal = ExtResource("30_587qa")
+texture_pressed = ExtResource("31_p707w")
+texture_hover = ExtResource("32_77vin")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="DefeatMenu/ExitButton" unique_id=1094419523]
+layout_mode = 0
+offset_right = 540.0
+offset_bottom = 180.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_lnhn1")
+theme_override_font_sizes/font_size = 160
+text = "Sair"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pontos" type="Label" parent="DefeatMenu" unique_id=1004022141]
+layout_mode = 0
+offset_right = 900.0
+offset_bottom = 840.0
+theme_override_fonts/font = ExtResource("5_lnhn1")
+theme_override_font_sizes/font_size = 180
+horizontal_alignment = 1
+vertical_alignment = 1
