@@ -12,6 +12,29 @@ extends Node2D
 @onready var attack_button: TextureButton = $AttackButton
 @onready var skip_button: TextureButton = $SkipButton
 
+# --- REFERÊNCIAS DOS MENUS DE FIM DE JOGO ---
+@onready var victory_menu: TextureRect = $VictoryMenu
+@onready var defeat_menu: TextureRect = $DefeatMenu
+
+@onready var victory_continue_btn: TextureButton = $VictoryMenu/ContinueButton
+@onready var victory_exit_btn: TextureButton = $VictoryMenu/ExitButton
+
+@onready var defeat_retry_btn: TextureButton = $DefeatMenu/RetryButton
+@onready var defeat_exit_btn: TextureButton = $DefeatMenu/ExitButton
+
+@onready var victory_pontos_label: Label = $VictoryMenu/Pontos
+@onready var defeat_pontos_label: Label = $DefeatMenu/Pontos
+
+@onready var sfx_ataque: AudioStreamPlayer2D = $SFXAtaque
+@onready var sfx_dano: AudioStreamPlayer2D = $SFXDano
+@onready var sfx_victory: AudioStreamPlayer2D = $SFXVictory
+@onready var sfx_game_over: AudioStreamPlayer2D = $SFXGameOver
+@onready var sfx_perfect: AudioStreamPlayer2D = $SFXPerfect
+
+
+# --- SISTEMA DE PONTUAÇÃO ACUMULADA ---
+var pontuacao_total: int = 0
+
 # 1. ALTERAÇÃO: Vida inicial virou 10 (Nota máxima de avaliação)
 var vida_jogador: int = 10
 var nivel_atual: int = 1
@@ -24,6 +47,12 @@ var carta_selecionada: Card = null
 
 func _ready() -> void:
 	_conectar_botoes_ui()
+	_conectar_botoes_menus() # Nova função de conexões
+	
+	# Garante que os menus começam invisíveis
+	victory_menu.visible = false
+	defeat_menu.visible = false
+	
 	_atualiza_vida()
 	configurar_inimigos_do_combate(gm_atual)
 	start_initial_combat()
@@ -35,6 +64,12 @@ func _conectar_botoes_ui() -> void:
 	divide_button.pressed.connect(_on_divide_button_pressed)
 	attack_button.pressed.connect(_on_attack_button_pressed)
 	skip_button.pressed.connect(_on_skip_button_pressed)    
+	
+func _conectar_botoes_menus() -> void:
+	victory_continue_btn.pressed.connect(_on_continue_button_pressed)
+	victory_exit_btn.pressed.connect(_on_exit_button_pressed)
+	defeat_retry_btn.pressed.connect(_on_retry_button_pressed)
+	defeat_exit_btn.pressed.connect(_on_exit_button_pressed)
 
 func _on_plus_button_pressed() -> void:
 	modo_atual = Modo.ADICAO
@@ -123,6 +158,8 @@ func _on_enemy_clicked(inimigo: Enemy) -> void:
 		
 		print("Sucesso! Descarregando ", carta_selecionada.val, " de dano em ", inimigo.name)
 		
+		if sfx_ataque:
+			sfx_ataque.play()
 		# --- MODIFICAÇÃO AQUI ---
 		# Adicionamos 'await' para o combate congelar enquanto o monstro passa pela animação de dano ou morte
 		await inimigo.tomar_dano(carta_selecionada.val)
@@ -140,6 +177,8 @@ func _on_enemy_clicked(inimigo: Enemy) -> void:
 		if foi_perfect:
 			print("✨ PERFECT! Inimigo eliminado no valor exato. Rodada do inimigo CANCELADA!")
 			print("--- SEU TURNO ---")
+			if sfx_perfect:
+				sfx_perfect.play()
 			for i in range(3):
 				draw_card()
 		else:
@@ -150,29 +189,20 @@ func _on_enemy_clicked(inimigo: Enemy) -> void:
 
 func _checar_condicao_de_vitoria() -> bool:
 	if $Enemy1.enemy_current_life <= 0 and $Enemy2.enemy_current_life <= 0 and $Enemy3.enemy_current_life <= 0:
-		print("\n🎉 VITÓRIA! Todos os inimigos do nível ", nivel_atual, " foram derrotados!")
-		_avancar_de_nivel()
+		print("\n🎉 VITÓRIA DO COMBATE!")
+		if sfx_victory:
+			sfx_victory.play()
+		
+		# 3. PONTUAÇÃO: Incrementa o valor da vida restante do jogador na pontuação total
+		pontuacao_total += vida_jogador
+		
+		# Atualiza o texto da Label de pontos do menu de vitória e mostra o ecrã
+		victory_pontos_label.text = "Pontos: " + str(pontuacao_total)
+		victory_menu.visible = true
+		
 		return true
 	return false
 
-func _avancar_de_nivel() -> void:
-	nivel_atual += 1
-	if nivel_atual > 10:
-		print("🏆 PARABÉNS! Você concluiu a Torre de Hilbert!")
-		return
-		
-	var multiplicador = randf_range(1.4, 1.6)
-	gm_atual = floor(gm_atual * multiplicador)
-	
-	print("Carregando Nível ", nivel_atual, "... Nova Vida dos Inimigos: ", gm_atual)
-	
-	for carta in mao_atual:
-		if is_instance_valid(carta):
-			carta.queue_free()
-	mao_atual.clear()
-	
-	configurar_inimigos_do_combate(gm_atual)
-	start_initial_combat()
 
 func ExecuteAddition(cardA: Card, cardB: Card) -> void:
 	var result_value = cardA.val + cardB.val
@@ -228,6 +258,8 @@ func _executar_turno_do_inimigo() -> void:
 			# 1. ALTERAÇÃO: Cada sobrevivente causa exatamente 1 ponto estável de dano
 			print(inimigo.name, " atacou e tirou 1 ponto da sua avaliação!")
 			total_dano_recebido += 1
+			if sfx_dano:
+				sfx_dano.play()
 				
 	if total_dano_recebido > 0:
 		vida_jogador -= total_dano_recebido
@@ -238,8 +270,64 @@ func _executar_turno_do_inimigo() -> void:
 		
 		if vida_jogador <= 0:
 			print("Game Over! Sua nota chegou a 0.")
-			return 
+			if sfx_game_over:
+				sfx_game_over.play()
+			# Exibe a pontuação final acumulada na Label do ecrã de derrota
+			defeat_pontos_label.text = "Pontos: " + str(pontuacao_total)
+			defeat_menu.visible = true
+			return
 			
 	print("--- SEU TURNO ---")
 	for i in range(3):
 		draw_card()
+		
+		
+# --- CALLBACKS DOS BOTÕES DOS MENUS (VITÓRIA / DERROTA) ---
+
+func _on_continue_button_pressed() -> void:
+	nivel_atual += 1
+	
+	# Validação do teto de níveis estabelecido no GDD
+	if nivel_atual > 10:
+		print("🏆 PARABÉNS! Completou o nível 10 e finalizou o Rogue Math!")
+		get_tree().change_scene_to_file("res://PrimeiraCena.tscn")
+		return
+		
+	victory_menu.visible = false
+	
+	# 1. ALTERAÇÃO: Novo combate com o valor de GM incrementado em 10% em relação ao anterior
+	gm_atual = int(gm_atual * 1.20)
+	print("Avançando para o Nível ", nivel_atual, ". Novo GM balanceado: ", gm_atual)
+	
+	# Limpa as cartas remanescentes da mão anterior
+	_limpar_mao_jogador()
+	
+	# Reinicializa a sala de combate
+	configurar_inimigos_do_combate(gm_atual)
+	start_initial_combat()
+
+func _on_retry_button_pressed() -> void:
+	defeat_menu.visible = false
+	
+	# 2. ALTERAÇÃO: Reinicia o jogo com os valores iniciais padrão de fábrica
+	nivel_atual = 1
+	gm_atual = 10
+	vida_jogador = 10
+	pontuacao_total = 0 # Zera os pontos acumulados no Game Over
+	
+	_atualiza_vida()
+	_limpar_mao_jogador()
+	
+	configurar_inimigos_do_combate(gm_atual)
+	start_initial_combat()
+
+func _on_exit_button_pressed() -> void:
+	# Faz o jogador retornar ao menu principal (PrimeiraCena)
+	get_tree().change_scene_to_file("res://PrimeiraCena.tscn")
+
+# Função utilitária para limpar as cartas físicas e lógicas ao transicionar de estado
+func _limpar_mao_jogador() -> void:
+	for carta in mao_atual:
+		if is_instance_valid(carta):
+			carta.queue_free()
+	mao_atual.clear()

@@ -3,20 +3,26 @@ class_name Enemy
 
 @onready var life_bar: TextureProgressBar = $LifeBar
 @onready var text_bar: Label = $LifeBar/TextBar
+@onready var sfx_enemy_defeat: AudioStreamPlayer2D = $"../SFXEnemyDefeat"
 
 signal selecionado(inimigo: Enemy)
 
 var enemy_total_life: int = 10
 var enemy_current_life: int = 10
+var posicao_inicial_real: Vector2
 
 func _ready():
 	_atualiza_vida_inimigo()
+	posicao_inicial_real = position
 
 func inicializar_inimigo(gm_valor: int) -> void:
 	enemy_total_life = (gm_valor * randi_range(5, 15)) / 10
 	enemy_current_life = enemy_total_life
 	_atualiza_vida_inimigo()
-	show() # Garante que reapareça no próximo nível
+	show() # 1. Faz o nó voltar a ficar visível na árvore de renderização
+	modulate = Color(1, 1, 1, 1) # 2. Reseta a opacidade (Alpha) e tira o flash branco do Tween de derrota
+	position = posicao_inicial_real
+	
 
 func _atualiza_vida_inimigo():
 	if life_bar:
@@ -49,20 +55,16 @@ func _animar_receber_dano() -> void:
 	# Treme horizontalmente (efeito de impacto)
 	var tween_shake = create_tween()
 	var pos_original = position
-	tween_shake.tween_property(self, "position", pos_original + Vector2(10, 0), 0.05)
-	tween_shake.tween_property(self, "position", pos_original - Vector2(10, 0), 0.05)
-	tween_shake.tween_property(self, "position", pos_original, 0.05)
+	tween_shake.tween_property(self, "position", posicao_inicial_real + Vector2(10, 0), 0.05)
+	tween_shake.tween_property(self, "position", posicao_inicial_real - Vector2(10, 0), 0.05)
+	tween_shake.tween_property(self, "position", posicao_inicial_real, 0.05)
 
 func animar_ataque() -> void:
 	# 3. ANIMAÇÃO DE DANO RECEBIDO: Inimigo dá um "tranco" para frente e volta
-	var tween = create_tween()
-	var pos_original = position
-	
+	var tween = create_tween()	
 	# Avança rápido para frente (simulando uma investida)
-	tween.tween_property(self, "position", pos_original + Vector2(0, 30), 0.1)
-	# Volta lentamente para a posição original
-	tween.tween_property(self, "position", pos_original, 0.15)
-	
+	tween.tween_property(self, "position", posicao_inicial_real + Vector2(0, 30), 0.1)	# Volta lentamente para a posição original
+	tween.tween_property(self, "position", posicao_inicial_real, 0.15)	
 	# Espera o movimento físico terminar antes de liberar o código do combate
 	await tween.finished
 
@@ -90,6 +92,8 @@ func animar_derrota() -> void:
 
 func derrotado() -> void:
 	print(name, " foi derrotado!")
+	if sfx_enemy_defeat:
+		sfx_enemy_defeat.play()
 	await animar_derrota()
 	hide() 
 

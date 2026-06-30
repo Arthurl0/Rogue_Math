@@ -33,6 +33,13 @@
 [ext_resource type="Texture2D" uid="uid://cak8wqljdk31t" path="res://ButtonsTextures/ButtonTextPressed.svg" id="31_p707w"]
 [ext_resource type="Texture2D" uid="uid://biqcagkap1ekk" path="res://ButtonsTextures/ButtonTextHover.svg" id="32_77vin"]
 [ext_resource type="Texture2D" uid="uid://pbah07ugaxra" path="res://CardTextures/Lost_menu.svg" id="33_sdhnr"]
+[ext_resource type="AudioStream" uid="uid://gn7fen0m18lg" path="res://Audio/361636__jofae__8-bit-slam.mp3" id="34_p707w"]
+[ext_resource type="AudioStream" uid="uid://bw57qhvi4p3sn" path="res://Audio/610280__brickdeveloper171__retro-hit-sound.wav" id="35_77vin"]
+[ext_resource type="AudioStream" uid="uid://clgsrt5qlpqmu" path="res://Audio/856038__yokomatsuko__electronic-victory-sound.mp3" id="36_7q1b7"]
+[ext_resource type="AudioStream" uid="uid://bbvffioai2v87" path="res://Audio/733259__jadis0x__simple-video-game-music-loop.wav" id="36_77vin"]
+[ext_resource type="AudioStream" uid="uid://cokikbnsflm63" path="res://Audio/856516__coghezzi__game-over-orchestral-stinger-cartoon-defeat.wav" id="37_alyn1"]
+[ext_resource type="AudioStream" uid="uid://hejnpyjgss0p" path="res://Audio/756357__indyarts__echoing-retro-impact.wav" id="39_alyn1"]
+[ext_resource type="AudioStream" uid="uid://cu0ukbulwdnsf" path="res://Audio/336933__the-sacha-rush__coin4.wav" id="40_jhiox"]
 
 [sub_resource type="Animation" id="Animation_1d4ld"]
 length = 0.001
@@ -323,9 +330,10 @@ vertical_alignment = 1
 [node name="Pontos" type="Label" parent="VictoryMenu" unique_id=642600803]
 layout_mode = 0
 offset_right = 900.0
-offset_bottom = 840.0
+offset_bottom = 850.0
 theme_override_fonts/font = ExtResource("5_lnhn1")
 theme_override_font_sizes/font_size = 180
+text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -337,7 +345,7 @@ offset_bottom = 1860.0
 texture = ExtResource("33_sdhnr")
 stretch_mode = 5
 
-[node name="ContinueButton" type="TextureButton" parent="DefeatMenu" unique_id=1684086021]
+[node name="RetryButton" type="TextureButton" parent="DefeatMenu" unique_id=1684086021]
 layout_mode = 0
 offset_left = 180.0
 offset_top = 1250.0
@@ -348,7 +356,7 @@ texture_pressed = ExtResource("31_p707w")
 texture_hover = ExtResource("32_77vin")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="DefeatMenu/ContinueButton" unique_id=710617989]
+[node name="Label" type="Label" parent="DefeatMenu/RetryButton" unique_id=710617989]
 layout_mode = 0
 offset_right = 540.0
 offset_bottom = 180.0
@@ -384,8 +392,37 @@ vertical_alignment = 1
 [node name="Pontos" type="Label" parent="DefeatMenu" unique_id=1004022141]
 layout_mode = 0
 offset_right = 900.0
-offset_bottom = 840.0
+offset_bottom = 850.0
 theme_override_fonts/font = ExtResource("5_lnhn1")
 theme_override_font_sizes/font_size = 180
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SFXAtaque" type="AudioStreamPlayer2D" parent="." unique_id=1684257411]
+stream = ExtResource("34_p707w")
+
+[node name="SFXDano" type="AudioStreamPlayer2D" parent="." unique_id=159193319]
+stream = ExtResource("35_77vin")
+
+[node name="SFXVictory" type="AudioStreamPlayer2D" parent="." unique_id=1656169464]
+stream = ExtResource("36_7q1b7")
+volume_db = 10.0
+
+[node name="SFXGameOver" type="AudioStreamPlayer2D" parent="." unique_id=1736760203]
+stream = ExtResource("37_alyn1")
+volume_db = 10.0
+
+[node name="BGM1" type="AudioStreamPlayer2D" parent="." unique_id=2006567872]
+stream = ExtResource("36_77vin")
+volume_db = -5.0
+autoplay = true
+
+[node name="BGM2" type="AudioStreamPlayer2D" parent="." unique_id=44218724]
+
+[node name="BGM3" type="AudioStreamPlayer2D" parent="." unique_id=378269789]
+
+[node name="SFXEnemyDefeat" type="AudioStreamPlayer2D" parent="." unique_id=330155826]
+stream = ExtResource("39_alyn1")
+
+[node name="SFXPerfect" type="AudioStreamPlayer2D" parent="." unique_id=1081239520]
+stream = ExtResource("40_jhiox")

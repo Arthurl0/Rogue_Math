@@ -87,3 +87,5 @@ export_presets.cfg
 *.import
 *.svg
 *.png
+*.wav
+*.mp3

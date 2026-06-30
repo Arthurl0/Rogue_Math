@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://dytb2tnj5hekf" path="res://HelvetiPixel.ttf" id="2_pw7wf"]
 [ext_resource type="Texture2D" uid="uid://n2lsbk7164lp" path="res://GameTitle.svg" id="3_0q2ab"]
 [ext_resource type="Texture2D" uid="uid://vcn245ms4rra" path="res://scene.svg" id="3_pw7wf"]
+[ext_resource type="AudioStream" uid="uid://btoo63hmoej2j" path="res://Audio/684608__jadis0x__short-music-by-jadis0x.wav" id="5_tpayv"]
 
 [node name="Cena" type="Node2D" unique_id=886527914]
 script = ExtResource("1_0q2ab")
@@ -52,3 +53,7 @@ offset_bottom = 1060.0
 texture = ExtResource("3_0q2ab")
 stretch_mode = 5
 metadata/_edit_lock_ = true
+
+[node name="MenuBGM" type="AudioStreamPlayer2D" parent="." unique_id=7983421]
+stream = ExtResource("5_tpayv")
+autoplay = true
