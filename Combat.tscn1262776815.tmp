@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d027x5gvui6v2" path="res://combat.gd" id="1_8suwl"]
 [ext_resource type="Texture2D" uid="uid://bikipfadn1bua" path="res://CombatTexture.svg" id="1_vj48t"]
+[ext_resource type="PackedScene" uid="uid://dto05sxmd5m4x" path="res://Card.tscn" id="2_tivk6"]
 [ext_resource type="Texture2D" uid="uid://b6r4pf4nnpudl" path="res://zero_monster_sprite.png" id="4_kuwpv"]
 [ext_resource type="FontFile" uid="uid://dytb2tnj5hekf" path="res://HelvetiPixel.ttf" id="5_lnhn1"]
 [ext_resource type="Script" uid="uid://bbjvmy0usmcr8" path="res://enemy.gd" id="5_tivk6"]
@@ -99,6 +100,7 @@ _data = {
 
 [node name="Combat" type="Node2D" unique_id=1544415699]
 script = ExtResource("1_8suwl")
+card_scene = ExtResource("2_tivk6")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1929837428]
 offset_right = 1080.0
@@ -196,9 +198,9 @@ libraries/ = SubResource("AnimationLibrary_c7spo")
 
 [node name="PlayerBar" type="TextureProgressBar" parent="." unique_id=1459865662]
 offset_left = 40.0
-offset_top = 50.0
+offset_top = 200.0
 offset_right = 120.0
-offset_bottom = 60.0
+offset_bottom = 210.0
 scale = Vector2(12.5, 12.5)
 texture_under = ExtResource("12_pbxr6")
 texture_progress = ExtResource("13_rjkgv")
@@ -424,3 +426,13 @@ stream = ExtResource("39_alyn1")
 
 [node name="SFXPerfect" type="AudioStreamPlayer2D" parent="." unique_id=1081239520]
 stream = ExtResource("40_jhiox")
+
+[node name="Level" type="Label" parent="." unique_id=2020588700]
+z_index = -1
+offset_right = 1080.0
+offset_bottom = 214.0
+theme_override_fonts/font = ExtResource("5_lnhn1")
+theme_override_font_sizes/font_size = 160
+text = "Nível 1"
+horizontal_alignment = 1
+vertical_alignment = 1

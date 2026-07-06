@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://dytb2tnj5hekf" path="res://HelvetiPixel.ttf" id="2_pw7wf"]
 [ext_resource type="Texture2D" uid="uid://n2lsbk7164lp" path="res://GameTitle.svg" id="3_0q2ab"]
 [ext_resource type="Texture2D" uid="uid://vcn245ms4rra" path="res://scene.svg" id="3_pw7wf"]
+[ext_resource type="Texture2D" uid="uid://cl03111qps2fq" path="res://HowtoPlayPage.svg" id="5_84ylf"]
 [ext_resource type="AudioStream" uid="uid://btoo63hmoej2j" path="res://Audio/684608__jadis0x__short-music-by-jadis0x.wav" id="5_tpayv"]
 
 [node name="Cena" type="Node2D" unique_id=886527914]
@@ -26,20 +27,30 @@ metadata/_edit_lock_ = true
 
 [node name="StartButton" type="Button" parent="UI" unique_id=1725671769]
 layout_mode = 0
-offset_left = 199.0
-offset_top = 1125.0
-offset_right = 881.0
-offset_bottom = 1248.0
+offset_left = 220.0
+offset_top = 1080.0
+offset_right = 860.0
+offset_bottom = 1200.0
 theme_override_fonts/font = ExtResource("2_pw7wf")
 theme_override_font_sizes/font_size = 120
 text = "Iniciar"
 
+[node name="ComoJogar" type="Button" parent="UI" unique_id=2103281868]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 1260.0
+offset_right = 860.0
+offset_bottom = 1380.0
+theme_override_fonts/font = ExtResource("2_pw7wf")
+theme_override_font_sizes/font_size = 120
+text = "Como Jogar?"
+
 [node name="ExitButton" type="Button" parent="UI" unique_id=1389245924]
 layout_mode = 0
-offset_left = 199.0
-offset_top = 1320.0
-offset_right = 881.0
-offset_bottom = 1443.0
+offset_left = 220.0
+offset_top = 1440.0
+offset_right = 860.0
+offset_bottom = 1560.0
 theme_override_fonts/font = ExtResource("2_pw7wf")
 theme_override_font_sizes/font_size = 120
 text = "Sair"
@@ -53,6 +64,99 @@ offset_bottom = 1060.0
 texture = ExtResource("3_0q2ab")
 stretch_mode = 5
 metadata/_edit_lock_ = true
+
+[node name="JanelaInstrucoes" type="TextureRect" parent="UI" unique_id=2074198998]
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+texture = ExtResource("5_84ylf")
+stretch_mode = 5
+
+[node name="SairComoJogar" type="Button" parent="UI/JanelaInstrucoes" unique_id=571775439]
+z_index = 6
+layout_mode = 0
+offset_left = 900.0
+offset_top = 60.0
+offset_right = 1020.0
+offset_bottom = 180.0
+theme_override_fonts/font = ExtResource("2_pw7wf")
+theme_override_font_sizes/font_size = 120
+text = "X"
+
+[node name="TitleHtP" type="Label" parent="UI/JanelaInstrucoes" unique_id=1151706758]
+layout_mode = 0
+offset_left = 236.0
+offset_top = 80.0
+offset_right = 844.0
+offset_bottom = 183.0
+theme_override_colors/font_color = Color(0.011764706, 0.011764706, 0.011764706, 1)
+theme_override_fonts/font = ExtResource("2_pw7wf")
+theme_override_font_sizes/font_size = 120
+text = "COMO JOGAR?"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/JanelaInstrucoes" unique_id=591775278]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 240.0
+offset_right = 990.0
+offset_bottom = 1840.0
+horizontal_scroll_mode = 0
+
+[node name="Manual" type="Label" parent="UI/JanelaInstrucoes/ScrollContainer" unique_id=1442617227]
+custom_minimum_size = Vector2(900, 1600)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("2_pw7wf")
+theme_override_font_sizes/font_size = 48
+text = "Bem-vindo ao Rogue Math, um jogo onde a matemática é o seu maior superpoder para vencer desafios e subir a Torre de Hilbert! O seu objetivo é derrotar todos os monstros calculando os números certos para manter a sua nota máxima.
+🎯 O Objetivo do Jogo
+
+    Você enfrentará 10 níveis de combates matemáticos lineares.
+
+    Para passar de fase, você precisa reduzir a vida de todos os inimigos da sala a zero.
+
+    A sua vida inicial é 10. Pense nela como a sua \"nota\" de avaliação no jogo. Se ela chegar a 0, é Game Over!
+
+🃏 O Turno do Jogador e a Fusão de Cartas
+
+No início de cada batalha, você recebe uma mão com 5 cartas aleatórias com números de 1 a 9. Você pode combinar essas cartas usando os botões de operações na tela para criar números novos e mais fortes:
+
+    Adição (+): Junta o valor das duas cartas sem restrições (Ex: [4] + [3] vira [7]).
+
+    Subtração (-): Calcula sempre a carta maior menos a menor. Atenção: é proibido usar cartas de valores iguais, pois o jogo não permite cartas com o valor zero ou números negativos.
+
+    Multiplicação (×): Multiplica os valores das duas cartas, excelente para criar números bem altos rapidamente.
+
+    Divisão (÷): Divide a carta maior pela menor. Restrição: a divisão precisa ser exata (sem resto)! Por exemplo, [8] ÷ [2] é válido e vira [4], mas [7] ÷ [3] é bloqueado pelo jogo.
+
+⚔️ Regras de Combate e o Efeito \"Perfect\"
+
+Quando estiver pronto para atacar, clique no botão de Ataque, selecione uma carta da sua mão e clique no inimigo alvo.
+
+Existem duas formas de derrotar um monstro:
+
+    Ataque Comum (Overkill): Você pode jogar uma carta com um valor maior do que a vida do inimigo para eliminá-lo. O monstro morre, mas os outros inimigos sobreviventes na tela ficarão bravos e farão um contra-ataque.
+
+    O Golpe Perfeito (Perfect) ✨: Se você atacar um monstro usando uma carta com o valor exato da vida atual dele, você ganha um bônus Perfect! O monstro é eliminado instantaneamente e a rodada de contra-ataque dele é totalmente cancelada, protegendo a sua preciosa vida intacta.
+
+👾 O Turno do Inimigo
+
+    Se você realizar um ataque que não elimine todos os monstros com um Perfect, os inimigos sobreviventes farão a rodada deles.
+
+    Cada inimigo vivo que restar no cenário avançará e causará exatamente 1 ponto de dano na sua nota de vida.
+
+    Ao iniciar o seu novo turno, você comprará até 3 novas cartas aleatórias para continuar fazendo suas contas, respeitando o limite máximo de 5 cartas na mão.
+
+🏆 Pontuação e Avanço de Nível
+
+    Sempre que você limpa uma sala e vence o combate, a sua vida restante é somada à sua Pontuação Total acumulada. Se você terminar com 10 de vida, ganha 10 pontos!
+
+    Ao avançar para a próxima fase clicando em Continuar, a sua vida é totalmente recuperada para 10, e os novos monstros surgirão com a vida máxima deles incrementada em 10%.
+
+Como você pretende exibir esse manual na tela? Quer ajuda para criar o script na Godot que faz essa janela de instruções abrir suavemente (com um efeito de fade ou popup) quando o botão do Menu Principal for clicado?"
+autowrap_mode = 2
 
 [node name="MenuBGM" type="AudioStreamPlayer2D" parent="." unique_id=7983421]
 stream = ExtResource("5_tpayv")

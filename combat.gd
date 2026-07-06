@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var card_scene: PackedScene
+var card_scene: PackedScene = preload("res://Card.tscn")
 @onready var mao_jogador: HBoxContainer = $MaoJogador
 @onready var player_bar: TextureProgressBar = $PlayerBar
 @onready var label_player_bar: Label = $PlayerBar/LabelPlayerBar
@@ -12,7 +12,6 @@ extends Node2D
 @onready var attack_button: TextureButton = $AttackButton
 @onready var skip_button: TextureButton = $SkipButton
 
-# --- REFERÊNCIAS DOS MENUS DE FIM DE JOGO ---
 @onready var victory_menu: TextureRect = $VictoryMenu
 @onready var defeat_menu: TextureRect = $DefeatMenu
 
@@ -31,11 +30,8 @@ extends Node2D
 @onready var sfx_game_over: AudioStreamPlayer2D = $SFXGameOver
 @onready var sfx_perfect: AudioStreamPlayer2D = $SFXPerfect
 
-
-# --- SISTEMA DE PONTUAÇÃO ACUMULADA ---
 var pontuacao_total: int = 0
 
-# 1. ALTERAÇÃO: Vida inicial virou 10 (Nota máxima de avaliação)
 var vida_jogador: int = 10
 var nivel_atual: int = 1
 var gm_atual: int = 10
@@ -47,9 +43,8 @@ var carta_selecionada: Card = null
 
 func _ready() -> void:
 	_conectar_botoes_ui()
-	_conectar_botoes_menus() # Nova função de conexões
-	
-	# Garante que os menus começam invisíveis
+	_conectar_botoes_menus() 
+
 	victory_menu.visible = false
 	defeat_menu.visible = false
 	
@@ -273,7 +268,7 @@ func _executar_turno_do_inimigo() -> void:
 			if sfx_game_over:
 				sfx_game_over.play()
 			# Exibe a pontuação final acumulada na Label do ecrã de derrota
-			defeat_pontos_label.text = "Pontos: " + str(pontuacao_total)
+			defeat_pontos_label.text = str(pontuacao_total)
 			defeat_menu.visible = true
 			return
 			
@@ -286,12 +281,8 @@ func _executar_turno_do_inimigo() -> void:
 
 func _on_continue_button_pressed() -> void:
 	nivel_atual += 1
-	
-	# Validação do teto de níveis estabelecido no GDD
-	if nivel_atual > 10:
-		print("🏆 PARABÉNS! Completou o nível 10 e finalizou o Rogue Math!")
-		get_tree().change_scene_to_file("res://PrimeiraCena.tscn")
-		return
+	vida_jogador = 10
+	_atualiza_vida()
 		
 	victory_menu.visible = false
 	

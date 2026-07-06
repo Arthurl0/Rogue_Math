@@ -54,7 +54,7 @@ func _animar_receber_dano() -> void:
 	
 	# Treme horizontalmente (efeito de impacto)
 	var tween_shake = create_tween()
-	var pos_original = position
+	var _pos_original = position
 	tween_shake.tween_property(self, "position", posicao_inicial_real + Vector2(10, 0), 0.05)
 	tween_shake.tween_property(self, "position", posicao_inicial_real - Vector2(10, 0), 0.05)
 	tween_shake.tween_property(self, "position", posicao_inicial_real, 0.05)
