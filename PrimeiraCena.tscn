@@ -109,53 +109,48 @@ theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 
 theme_override_constants/outline_size = 0
 theme_override_constants/shadow_outline_size = 10
 theme_override_fonts/font = ExtResource("2_pw7wf")
-theme_override_font_sizes/font_size = 48
-text = "Bem-vindo ao Rogue Math, um jogo onde a matemática é o seu maior superpoder para vencer desafios e subir a Torre de Hilbert! O seu objetivo é derrotar todos os monstros calculando os números certos para manter a sua nota máxima.
-🎯 O Objetivo do Jogo
+theme_override_font_sizes/font_size = 72
+text = "Bem-vindo ao Rogue Math, um jogo onde a matemática é a sua ferramenta para superar desafios.
 
-    Você enfrentará 10 níveis de combates matemáticos lineares.
+Para passar de fase, você precisa reduzir a vida de todos os inimigos da sala a zero.
 
-    Para passar de fase, você precisa reduzir a vida de todos os inimigos da sala a zero.
-
-    A sua vida inicial é 10. Pense nela como a sua \"nota\" de avaliação no jogo. Se ela chegar a 0, é Game Over!
-
-🃏 O Turno do Jogador e a Fusão de Cartas
+A sua vida inicial é 10. Se ela chegar a 0, é fim de jogo, portanto seja cuidadoso.
 
 No início de cada batalha, você recebe uma mão com 5 cartas aleatórias com números de 1 a 9. Você pode combinar essas cartas usando os botões de operações na tela para criar números novos e mais fortes:
 
-    Adição (+): Junta o valor das duas cartas sem restrições (Ex: [4] + [3] vira [7]).
+    		Adição (+): Junta o valor das duas cartas sem restrições (Ex: [4] + [3] vira [7]).
 
-    Subtração (-): Calcula sempre a carta maior menos a menor. Atenção: é proibido usar cartas de valores iguais, pois o jogo não permite cartas com o valor zero ou números negativos.
+    		Subtração (-): Calcula sempre a carta maior menos a menor. Atenção: é proibido usar cartas de valores iguais, pois o jogo não permite cartas com o valor zero ou números negativos.
 
-    Multiplicação (×): Multiplica os valores das duas cartas, excelente para criar números bem altos rapidamente.
+    		Multiplicação (×): Multiplica os valores das duas cartas, excelente para criar números bem altos rapidamente.
 
-    Divisão (÷): Divide a carta maior pela menor. Restrição: a divisão precisa ser exata (sem resto)! Por exemplo, [8] ÷ [2] é válido e vira [4], mas [7] ÷ [3] é bloqueado pelo jogo.
+    		Divisão (÷): Divide a carta maior pela menor. Restrição: a divisão precisa ser exata (sem resto)! Por exemplo, [8] ÷ [2] é válido e vira [4], mas [7] ÷ [3] é bloqueado pelo jogo.
 
-⚔️ Regras de Combate e o Efeito \"Perfect\"
+Regras de Combate:
 
-Quando estiver pronto para atacar, clique no botão de Ataque, selecione uma carta da sua mão e clique no inimigo alvo.
+	Quando estiver pronto para atacar, clique no botão de Ataque, selecione uma carta da sua mão e clique no inimigo alvo.
 
-Existem duas formas de derrotar um monstro:
+	Existem duas formas de derrotar um monstro:
 
-    Ataque Comum (Overkill): Você pode jogar uma carta com um valor maior do que a vida do inimigo para eliminá-lo. O monstro morre, mas os outros inimigos sobreviventes na tela ficarão bravos e farão um contra-ataque.
+    		Ataque Comum: Você pode jogar uma carta com um valor maior do que a vida do inimigo para eliminá-lo. O monstro morre, mas os outros inimigos sobreviventes na tela farão um contra-ataque.
 
-    O Golpe Perfeito (Perfect) ✨: Se você atacar um monstro usando uma carta com o valor exato da vida atual dele, você ganha um bônus Perfect! O monstro é eliminado instantaneamente e a rodada de contra-ataque dele é totalmente cancelada, protegendo a sua preciosa vida intacta.
+    		O Golpe Perfeito: Se você atacar um inimigo usando uma carta com o valor exato da vida atual dele, você ganha um turno bônus! O inimigo é eliminado instantaneamente, permitindo você continuar a realizar ataques.
 
-👾 O Turno do Inimigo
+		Pular Rodada: Ao pressionar o botão de Pulo, você estará dando a vez ao inimigo realizar o ataque dele. Use com cuidado!
 
-    Se você realizar um ataque que não elimine todos os monstros com um Perfect, os inimigos sobreviventes farão a rodada deles.
+	O Turno do Inimigo
 
-    Cada inimigo vivo que restar no cenário avançará e causará exatamente 1 ponto de dano na sua nota de vida.
+    		Se você realizar um ataque que não elimine todos os monstros, os inimigos sobreviventes farão a rodada deles.
 
-    Ao iniciar o seu novo turno, você comprará até 3 novas cartas aleatórias para continuar fazendo suas contas, respeitando o limite máximo de 5 cartas na mão.
+    		Cada inimigo vivo que restar no cenário avançará e causará exatamente 1 ponto de dano em sua vida.
 
-🏆 Pontuação e Avanço de Nível
+    		Ao iniciar o seu novo turno, você comprará até 3 novas cartas aleatórias para continuar fazendo suas contas, respeitando o limite máximo de 5 cartas na mão.
+
+Pontuação e Avanço de Nível
 
     Sempre que você limpa uma sala e vence o combate, a sua vida restante é somada à sua Pontuação Total acumulada. Se você terminar com 10 de vida, ganha 10 pontos!
 
-    Ao avançar para a próxima fase clicando em Continuar, a sua vida é totalmente recuperada para 10, e os novos monstros surgirão com a vida máxima deles incrementada em 10%.
-
-Como você pretende exibir esse manual na tela? Quer ajuda para criar o script na Godot que faz essa janela de instruções abrir suavemente (com um efeito de fade ou popup) quando o botão do Menu Principal for clicado?"
+    Ao avançar para a próxima fase clicando em Continuar, a sua vida é totalmente recuperada para 10, e os novos monstros surgirão com mais vida e mais fortes."
 autowrap_mode = 2
 
 [node name="MenuBGM" type="AudioStreamPlayer2D" parent="." unique_id=7983421]
